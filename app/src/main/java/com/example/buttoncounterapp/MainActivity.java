@@ -4,11 +4,51 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+// we are going to be importing widgets
+import android.view.View;
+import android.widget.Button; //field that is going to be storing reference
+import android.widget.EditText;
+import android.widget.TextView;
 
+public class MainActivity extends AppCompatActivity {
+    //need to make sure that you have the same name as the fields that you have defined when dragging the widgets
+   /* private EditText editText;
+    private Button button;
+    private TextView textView;
+    */
+
+    private EditText userInput;
+    private Button button;
+    private TextView textView;
+    private int numTimesClicked = 0;
+
+    //bundle is used to pass data around
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main); //this is going to be telling you which layout you are going to be using
+
+        //invoking the user input on the textview field
+        //every widget is a view
+        userInput = (EditText) findViewById(R.id.editText);
+        button = (Button) findViewById(R.id.button);
+        textView = (TextView) findViewById(R.id.textView);
+
+        //method that is going to be used in order to increment the number of times the button
+        //has been clicked
+        View.OnClickListener ourOnClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                numTimesClicked = numTimesClicked +1;
+                String result = "\nThe button has been pressed " + numTimesClicked + " times!" ;
+                textView.append(result);
+            }
+        };
+
+        //we are going to be using the ourOnClickListener method when the button is clicked
+        //ourOnClickListener method is going to be used on OnClickListener
+        button.setOnClickListener(ourOnClickListener);
     }
+
+
 }
