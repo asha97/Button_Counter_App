@@ -1,11 +1,13 @@
 package com.example.buttoncounterapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
 // we are going to be importing widgets
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button; //field that is going to be storing reference
 import android.widget.EditText;
@@ -22,16 +24,20 @@ public class MainActivity extends AppCompatActivity {
     private Button button;
     private TextView textView;
     //private int numTimesClicked = 0;
+    private static final String TAG = "MainActivity";
 
     //bundle is used to pass data around
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate: in");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main); //this is going to be telling you which layout you are going to be using
 
         //invoking the user input on the textview field
         //every widget is a view
         userInput = (EditText) findViewById(R.id.editText);
+        userInput.setText("");
+
         button = (Button) findViewById(R.id.button);
         textView = (TextView) findViewById(R.id.textView);
 
@@ -57,14 +63,31 @@ public class MainActivity extends AppCompatActivity {
                 String result = userInput.getText().toString();
                 result  = result + "\n";
                 textView.append(result);
-
+                userInput.setText("");
             }
+
+            //bundle is used to pass data around
+            //we are going to be using it for restoring the states.
         };
 
         //we are going to be using the ourOnClickListener method when the button is clicked
         //ourOnClickListener method is going to be used on OnClickListener
-        if (button !=null) {
             button.setOnClickListener(ourOnClickListener);
-        }
+            Log.d(TAG, "onCreate: out");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
     }
 }
