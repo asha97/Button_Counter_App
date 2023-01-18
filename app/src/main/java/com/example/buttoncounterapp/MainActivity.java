@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText userInput;
     private Button button;
     private TextView textView;
-    private int numTimesClicked = 0;
+    //private int numTimesClicked = 0;
 
     //bundle is used to pass data around
     @Override
@@ -44,19 +44,28 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener ourOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                numTimesClicked = numTimesClicked +1;
+               /* numTimesClicked = numTimesClicked +1;
                 String result = "\nThe button has been pressed " + numTimesClicked + " time!" ;
                 if (numTimesClicked != 1){
                     result += "s"; // this is going to be adding an s when there are more than one clicks, grammatical purposes!
                 }
                 result = result + "\n";
                 textView.append(result);
+                */
+
+                //here we are going to be getting the user input and display on the click of the button
+                String result = userInput.getText().toString();
+                result  = result + "\n";
+                textView.append(result);
+
             }
         };
 
         //we are going to be using the ourOnClickListener method when the button is clicked
         //ourOnClickListener method is going to be used on OnClickListener
-        button.setOnClickListener(ourOnClickListener);
+        if (button !=null) {
+            button.setOnClickListener(ourOnClickListener);
+        }
     }
 
 
