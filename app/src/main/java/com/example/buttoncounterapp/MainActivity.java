@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 // we are going to be importing widgets
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button; //field that is going to be storing reference
 import android.widget.EditText;
@@ -34,13 +35,21 @@ public class MainActivity extends AppCompatActivity {
         button = (Button) findViewById(R.id.button);
         textView = (TextView) findViewById(R.id.textView);
 
+        //we want to add the scrolling method when there are taps on the button
+        textView.setText("");
+        textView.setMovementMethod(new ScrollingMovementMethod());
+
         //method that is going to be used in order to increment the number of times the button
         //has been clicked
         View.OnClickListener ourOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 numTimesClicked = numTimesClicked +1;
-                String result = "\nThe button has been pressed " + numTimesClicked + " times!" ;
+                String result = "\nThe button has been pressed " + numTimesClicked + " time!" ;
+                if (numTimesClicked != 1){
+                    result += "s"; // this is going to be adding an s when there are more than one clicks, grammatical purposes!
+                }
+                result = result + "\n";
                 textView.append(result);
             }
         };
