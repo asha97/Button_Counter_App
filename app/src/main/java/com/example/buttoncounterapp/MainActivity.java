@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView textView;
     //private int numTimesClicked = 0;
     private static final String TAG = "MainActivity";
+    private final String TEXT_CONTENTS = "TextContents";
 
     //bundle is used to pass data around
     @Override
@@ -87,6 +88,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         Log.d(TAG, "onRestoreInstanceState: in");
         super.onRestoreInstanceState(savedInstanceState);
+       // String savedString = savedInstanceState.getString(TEXT_CONTENTS);
+       // textView.setText(savedString);
+        textView.setText(savedInstanceState.getString(TEXT_CONTENTS));
         Log.d(TAG, "onRestoreInstanceState: out");
     }
 
@@ -108,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         Log.d(TAG, "onSaveInstanceState: in");
+        outState.putString(TEXT_CONTENTS, textView.getText().toString());
         super.onSaveInstanceState(outState);
         Log.d(TAG, "onSaveInstanceState: out");
     }
@@ -126,4 +131,11 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onStop: out");
     }
 
+    //log.d methods are used showing messages on the terminal
+    //abd is going to run and install the emulator
+
+    //in logcat on the bottom, you could monitor what is going on in the code when you are entering something in the textview
+    //onPause is going to be saving the data when there is going to be a pause in the application!!!
+    //onStop is going to be used to stop a transfer for example
+    //each method has a context and a use!
 }
